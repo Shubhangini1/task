@@ -1,0 +1,29 @@
+{
+  "name": "monocept_code",
+  "version": "1.0.0",
+  "description": "Monocept Code Challenge",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "mocha test/test"
+  },
+  "author": "Shubhangini Varma",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "underscore": "^1.9.1"
+  },
+  "standard": {
+    "env": [
+      "mocha"
+    ]
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.2.0",
+    "chai-like": "^1.1.1",
+    "chai-things": "^0.2.0",
+    "mocha": "^5.2.0",
+    "@types/lodash": "^4.14.119"
+  }
+}
