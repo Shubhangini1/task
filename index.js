@@ -1,7 +1,10 @@
+let Finance = require('financejs')
+let _ = require('underscore')
 
+let finance = new Finance()
 // Input:
 
-var input = {
+let input = {
   'principal': 51020400,
   'upfrontFee': {
     'value': 1020400
@@ -86,17 +89,15 @@ var input = {
 }
 
 input.schedule.map((value) => {
-  console.log(value.id, value.principal + value.interestFee)
   value.totalPayment = value.principal + value.interestFee
   return value
 })
 
 // console.log('input===', input)
 
-var emi = input.schedule.length
-console.log('emi==', emi)
+let numOfPays = input.schedule.length
 
-var interestArray = []
+let interestArray = []
 input.schedule.forEach(element => {
   // console.log(element.interestFee)
   interestArray.push(element.interestFee)
@@ -108,11 +109,10 @@ function interestAdd (accumulator, a) {
 
 const totalInterestPaid = interestArray.reduce(interestAdd)
 
-console.log(' totalInterestPaid', totalInterestPaid)
+// console.log(' totalInterestPaid', totalInterestPaid)
 
-var principleArray = []
+let principleArray = []
 input.schedule.forEach(element => {
-  // console.log(element.interestFee)
   principleArray.push(element.principal)
 })
 
@@ -122,21 +122,18 @@ function principleAdd (total, b) {
 
 const totalPrinciplePaid = principleArray.reduce(principleAdd)
 
-console.log(' totalPrinciplePaid', totalPrinciplePaid)
-
 // Principle Loan Amount
 
-var pricipleLoanAmount = input.principal
-var upfrontAmount = input.upfrontFee.value
+let pricipleLoanAmount = input.principal
+let upfrontAmount = input.upfrontFee.value
 
-console.log('pricipleLoanAmount==', pricipleLoanAmount)
-console.log('upfrontAmount===', upfrontAmount)
-
-let apr = (((upfrontAmount + totalInterestPaid) / pricipleLoanAmount) / emi) * 12 * 100
-
+// calculate apr with formula 1
+let apr = (((upfrontAmount + totalInterestPaid) / pricipleLoanAmount) / numOfPays) * 12 * 100
+console.log('apr1 value ==', apr)
+// calculate apr with formula 2
 let apr2 = (2 * 365 * upfrontAmount) / (365 * pricipleLoanAmount + 1)
+console.log('apr2 value ==', apr2)
+// calculate IRR using Library
 
-console.log('apr2===', apr2)
-
-console.log('(upfrontAmount + totalInterestPaid)==', (upfrontAmount + totalInterestPaid))
-console.log('apr===', apr)
+let valueOfIRR = finance.IRR(-input.principal, upfrontAmount, totalInterestPaid + totalPrinciplePaid)
+console.log(valueOfIRR)
