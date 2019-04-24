@@ -7,14 +7,11 @@
     "start": "node app.js",
     "test": "mocha test/test"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Shubhangini1/monocept_task"
-  },
-  "author": "Shubhangini Varma",  
+  "author": "Shubhangini Varma",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
+    "jsonschema": "^1.2.4",
     "underscore": "^1.9.1"
   },
   "standard": {
